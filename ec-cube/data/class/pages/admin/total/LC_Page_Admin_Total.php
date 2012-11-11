@@ -28,7 +28,7 @@ require_once CLASS_EX_REALDIR . 'page_extends/admin/LC_Page_Admin_Ex.php';
  *
  * @package Page
  * @author LOCKON CO.,LTD.
- * @version $Id: LC_Page_Admin_Total.php 22010 2012-08-29 07:57:23Z Seasoft $
+ * @version $Id: LC_Page_Admin_Total.php 22093 2012-11-10 18:11:04Z Seasoft $
  */
 class LC_Page_Admin_Total extends LC_Page_Admin_Ex {
 
@@ -296,7 +296,7 @@ class LC_Page_Admin_Total extends LC_Page_Admin_Ex {
                     break;
             }
             // 月度集計の場合に、集計期間が本日日付で上書きされてしまうのを回避するため
-            if (($objFormParam->getValue('form') == 1) && ($out_flg == 1 )) {
+            if (($objFormParam->getValue('form') == 1) && ($out_flg == 1)) {
                 break;
             }
         }

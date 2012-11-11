@@ -27,7 +27,7 @@ define('HTML_REALDIR', rtrim(realpath(rtrim(realpath(dirname(__FILE__)), '/\\') 
 require_once HTML_REALDIR . 'define.php';
 define('INSTALL_FUNCTION', true);
 define('INSTALL_INFO_URL', 'http://www.ec-cube.net/install_info/index.php');
-if (ob_get_level() > 0) {
+if (ob_get_level() > 0 && ob_get_length() > 0) {
     while (ob_end_clean());
 }
 require_once HTML_REALDIR . HTML2DATA_DIR . 'require_base.php';
@@ -195,6 +195,17 @@ switch ($mode) {
                 $objPage->tpl_message .= '×：シーケンスの削除に失敗しました。<br />';
             }
         }
+
+        //マスターデータのキャッシュを削除
+        $cache_dir = '../../data/cache/';
+        $res_dir = opendir($cache_dir);
+        while ($file_name = readdir($res_dir )){
+            //dummy以外は削除
+            if ($file_name != 'dummy'){
+                unlink($cache_dir . $file_name);
+            }
+        }
+        closedir($res_dir);
 
         $objPage = lfDispStep3($objPage);
         break;

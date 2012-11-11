@@ -29,7 +29,7 @@
  *
  * @package Helper
  * @author Kentaro Ohkouchi
- * @version $Id: SC_Helper_Purchase.php 22004 2012-08-21 08:02:22Z habu $
+ * @version $Id: SC_Helper_Purchase.php 22089 2012-11-10 14:35:17Z Seasoft $
  */
 class SC_Helper_Purchase {
 
@@ -904,11 +904,11 @@ class SC_Helper_Purchase {
             $objQuery->update($table, $arrValues, $where, array($order_id));
         } else {
             if (SC_Utils_Ex::isBlank($order_id)) {
-                $order_id = $objQuery->nextVal('dtb_order_order_id');
+                $order_id = $this->getNextOrderID();
             }
             /*
              * 新規受付の場合は対応状況 null で insert し,
-             * sfUpdateOrderStatus で ORDER_NEW に変更する.
+             * sfUpdateOrderStatus で引数で受け取った値に変更する.
              */
             $status = $arrValues['status'];
             $arrValues['status'] = null;
@@ -1366,5 +1366,15 @@ __EOS__;
             if ($arrCartRow['quantity'] == 0) continue;
             $this->setShipmentItemTemp($shipping_id, $arrCartRow['id'], $arrCartRow['quantity']);
         }
+    }
+
+    /**
+     * 新規受注の注文IDを返す
+     *
+     * @return integer
+     */
+    public function getNextOrderID() {
+        $objQuery =& SC_Query_Ex::getSingletonInstance();
+        return $objQuery->nextVal('dtb_order_order_id');
     }
 }

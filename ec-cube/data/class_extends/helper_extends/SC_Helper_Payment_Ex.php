@@ -21,26 +21,19 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-class SC_SiteView extends SC_View_Ex {
-    function __construct($setPrevURL = true) {
-        parent::__construct();
+// {{{ requires
+require_once CLASS_REALDIR . 'helper/SC_Helper_Payment.php';
 
-        if ($setPrevURL) {
-            $this->setPrevURL();
-        }
-    }
-
-    function init() {
-        parent::init();
-
-        $this->_smarty->template_dir = TEMPLATE_REALDIR;
-        $this->_smarty->compile_dir = COMPILE_REALDIR;
-
-        $this->assignTemplatePath(DEVICE_TYPE_PC);
-    }
-
-    function setPrevURL() {
-            $objCartSess = new SC_CartSession_Ex();
-            $objCartSess->setPrevURL($_SERVER['REQUEST_URI']);
-    }
+/**
+ * 支払方法を管理するヘルパークラス(拡張).
+ *
+ * LC_Helper_Payment をカスタマイズする場合はこのクラスを編集する.
+ *
+ * @package Helper
+ * @author pineray
+ * @version $Id:$
+ */
+class SC_Helper_Payment_Ex extends SC_Helper_Payment
+{
+    //put your code here
 }

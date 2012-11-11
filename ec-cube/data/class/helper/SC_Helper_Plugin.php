@@ -25,7 +25,7 @@
  * プラグインのヘルパークラス.
  *
  * @package Helper
- * @version $Id: SC_Helper_Plugin.php 22018 2012-09-05 17:34:56Z Seasoft $
+ * @version $Id: SC_Helper_Plugin.php 22083 2012-11-07 12:04:04Z shutta $
  */
 class SC_Helper_Plugin {
     // プラグインのインスタンスの配列.
@@ -104,6 +104,12 @@ class SC_Helper_Plugin {
             array(&$arrArgs);
         }
 
+        if ($hook_point == 'loadClassFileChange') {
+            $arrSaveArgs = $arrArgs;
+            $arrClassName = array();
+            $arrClassPath = array();
+        }
+
         if (array_key_exists($hook_point, $this->arrRegistedPluginActions)
             && is_array($this->arrRegistedPluginActions[$hook_point])) {
 
@@ -112,8 +118,28 @@ class SC_Helper_Plugin {
 
                 foreach ($arrFuncs as $func) {
                     if (!is_null($func['function'])) {
-                        call_user_func_array($func['function'], $arrArgs);
+                        if ($hook_point == 'loadClassFileChange') {
+                            $classname = $arrSaveArgs[0];
+                            $classpath = $arrSaveArgs[1];
+                            $arrTempArgs = array(&$classname, &$classpath);
+
+                            call_user_func_array($func['function'], $arrTempArgs);
+
+                            if ($classname !== $arrSaveArgs[0]) {
+                                $arrClassName[] = $classname;
+                                $arrClassPath[] = $classpath;
+                            }
+                        } else {
+                            call_user_func_array($func['function'], $arrArgs);
+                        }
                     }
+                }
+            }
+
+            if ($hook_point == 'loadClassFileChange') {
+                if (count($arrClassName) > 0) {
+                    $arrArgs[0] = $arrClassName;
+                    $arrArgs[1] = $arrClassPath;
                 }
             }
         }

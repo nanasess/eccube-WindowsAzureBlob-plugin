@@ -29,7 +29,7 @@ require_once CLASS_EX_REALDIR . 'page_extends/mypage/LC_Page_AbstractMypage_Ex.p
  *
  * @package Page
  * @author LOCKON CO.,LTD.
- * @version $Id: LC_Page_Mypage_Favorite.php 22025 2012-09-10 10:05:38Z sunat134 $
+ * @version $Id: LC_Page_Mypage_Favorite.php 22056 2012-10-22 06:18:20Z h_yoshimoto $
  */
 class LC_Page_MyPage_Favorite extends LC_Page_AbstractMypage_Ex {
 

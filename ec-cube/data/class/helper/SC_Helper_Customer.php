@@ -27,7 +27,7 @@
  *
  * @package Helper
  * @author Hirokazu Fukuda
- * @version $Id: SC_Helper_Customer.php 21969 2012-07-19 08:45:57Z shutta $
+ * @version $Id: SC_Helper_Customer.php 22074 2012-11-05 09:30:06Z pineray $
  */
 class SC_Helper_Customer {
 
@@ -348,18 +348,6 @@ class SC_Helper_Customer {
     }
 
     /**
-     * お届け先フォーム初期化
-     *
-     * @param SC_FormParam $objFormParam SC_FormParam インスタンス
-     * @access public
-     * @return void
-     */
-    function sfCustomerOtherDelivParam(&$objFormParam) {
-        SC_Helper_Customer_Ex::sfCustomerCommonParam($objFormParam);
-        $objFormParam->addParam('', 'other_deliv_id');
-    }
-
-    /**
      * 会員共通
      *
      * @param SC_FormParam $objFormParam SC_FormParam インスタンス
@@ -414,11 +402,6 @@ class SC_Helper_Customer {
                 $objFormParam->addParam('メールアドレス', 'email', null, 'a', array('EXIST_CHECK', 'EMAIL_CHECK', 'NO_SPTAB' ,'EMAIL_CHAR_CHECK', 'MOBILE_EMAIL_CHECK'));
             }
         }
-    }
-
-    function sfCustomerOtherDelivErrorCheck(&$objFormParam) {
-        $objErr = SC_Helper_Customer_Ex::sfCustomerCommonErrorCheck($objFormParam);
-        return $objErr->arrErr;
     }
 
     /**
@@ -651,5 +634,18 @@ class SC_Helper_Customer {
                                     'fnNaviSearchOnlyPage',
                                     NAVI_PMAX);
         return array($linemax, $arrData, $objNavi);
+    }
+
+    /**
+     * 仮会員かどうかを判定する.
+     *
+     * @param string $login_email メールアドレス
+     * @return boolean 仮会員の場合 true
+     */
+    public function checkTempCustomer($login_email) {
+        $objQuery =& SC_Query_Ex::getSingletonInstance();
+        $where = 'email = ? AND status = 1 AND del_flg = 0';
+        $exists = $objQuery->exists('dtb_customer', $where, array($login_email));
+        return $exists;
     }
 }

@@ -523,10 +523,12 @@ __EOS__;
             }
             $js_fnOnLoad .= $this->lfSetSelectedData($this->arrProducts, $this->arrForm, $arrErr, $target_product_id);
         } else {
+            /*
             // カート「戻るボタン」用に保持
             $netURL = new Net_URL();
             //該当メソッドが無いため、$_SESSIONに直接セット
             $_SESSION['cart_referer_url'] = $netURL->getURL();
+            */
         }
 
         $this->tpl_javascript   .= 'function fnOnLoad(){' . $js_fnOnLoad . '}';
