@@ -27,7 +27,7 @@
  * TODO エラーハンドリング, ロギング方法を見直す
  *
  * @author LOCKON CO.,LTD.
- * @version $Id: SC_Query.php 22019 2012-09-05 17:38:08Z Seasoft $
+ * @version $Id: SC_Query.php 21914 2012-06-12 06:07:25Z Seasoft $
  */
 class SC_Query {
 
@@ -50,7 +50,7 @@ class SC_Query {
      */
     function __construct($dsn = '', $force_run = false, $new = false) {
 
-        if ($dsn == '') {
+        if ($dsn == "") {
             $dsn = array('phptype'  => DB_TYPE,
                          'username' => DB_USER,
                          'password' => DB_PASSWORD,
@@ -838,7 +838,8 @@ class SC_Query {
      * @return array テーブル名の配列
      */
     function listTables() {
-        return $this->dbFactory->listTables($this);
+        $objManager =& $this->conn->loadModule('Manager');
+        return $objManager->listTables();
     }
 
     /**

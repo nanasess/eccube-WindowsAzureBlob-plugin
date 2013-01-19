@@ -29,7 +29,7 @@ require_once CLASS_EX_REALDIR . 'page_extends/frontparts/bloc/LC_Page_FrontParts
  *
  * @package Page
  * @author LOCKON CO.,LTD.
- * @version $Id: LC_Page_FrontParts_Bloc_Category.php 22093 2012-11-10 18:11:04Z Seasoft $
+ * @version $Id: LC_Page_FrontParts_Bloc_Category.php 21867 2012-05-30 07:37:01Z nakanishi $
  */
 class LC_Page_FrontParts_Bloc_Category extends LC_Page_FrontParts_Bloc_Ex {
 
@@ -155,9 +155,12 @@ class LC_Page_FrontParts_Bloc_Category extends LC_Page_FrontParts_Bloc_Ex {
             );
             $this->root_parent_id[] = $arrParentID[0];
             $arrDispID = array_merge($arrBrothersID, $arrChildrenID);
-            foreach ($arrRet as &$arrCategory) {
-                if (in_array($arrCategory['category_id'], $arrDispID)) {
-                    $arrCategory['display'] = 1;
+            foreach ($arrRet as $key => $array) {
+                foreach ($arrDispID as $val) {
+                    if ($array['category_id'] == $val) {
+                        $arrRet[$key]['display'] = 1;
+                        break;
+                    }
                 }
             }
         }

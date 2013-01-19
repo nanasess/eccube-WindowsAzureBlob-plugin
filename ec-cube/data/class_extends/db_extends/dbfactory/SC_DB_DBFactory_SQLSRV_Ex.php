@@ -21,27 +21,18 @@
  * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
  */
 
-require_once CLASS_REALDIR . 'SC_Query.php';
+// {{{ requires
+require_once CLASS_REALDIR . 'db/dbfactory/SC_DB_DBFactory_SQLSRV.php';
 
-class SC_Query_Ex extends SC_Query {
-
-    /**
-     * 次のシーケンス値を取得する.
-     *
-     * @param string $seq_name 取得するシーケンス名
-     * @param integer 次のシーケンス値
-     */
-    function nextVal($seq_name) {
-        $dsn = array('phptype'  => DB_TYPE,
-                     'username' => DB_USER,
-                     'password' => DB_PASSWORD,
-                     'protocol' => 'tcp',
-                     'hostspec' => DB_SERVER,
-                     'port'     => DB_PORT,
-                     'database' => DB_NAME
-                     );
-        // SQL Azure では必ず新しいセッションを使用する
-        $_conn = MDB2::connect($dsn, $options);
-        return $_conn->nextID($seq_name, false);
-    }
+/**
+ * PostgreSQL 固有の処理をするクラス(拡張).
+ *
+ * SC_DB_DBFactory_PGSQL をカスタマイズする場合は, このクラスを使用する.
+ *
+ * @package DB
+ * @author LOCKON CO.,LTD.
+ * @version $Id: SC_DB_DBFactory_PGSQL_Ex.php 20764 2011-03-22 06:26:40Z nanasess $
+ */
+class SC_DB_DBFactory_SQLSRV_Ex extends SC_DB_DBFactory_SQLSRV {
 }
+?>

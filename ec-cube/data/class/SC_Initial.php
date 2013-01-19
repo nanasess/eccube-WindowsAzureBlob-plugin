@@ -25,7 +25,7 @@
  * アプリケーションの初期設定クラス.
  *
  * @author LOCKON CO.,LTD.
- * @version $Id: SC_Initial.php 22015 2012-08-30 15:51:39Z Seasoft $
+ * @version $Id: SC_Initial.php 21959 2012-07-05 02:14:17Z h_yoshimoto $
  */
 class SC_Initial {
 
@@ -37,7 +37,7 @@ class SC_Initial {
     function __construct() {
 
         /** EC-CUBEのバージョン */
-        define('ECCUBE_VERSION', '2.12.3-dev');
+        define('ECCUBE_VERSION', '2.12.1');
     }
 
     // }}}
@@ -124,6 +124,7 @@ class SC_Initial {
         ini_set('mbstring.substitute_character', 'none');
 
         mb_language('ja'); // mb_internal_encoding() より前に
+        // TODO 他に mb_language() している箇所の削除を検討
         // TODO .htaccess の mbstring.language を削除できないか検討
 
         mb_internal_encoding(CHAR_CODE); // mb_language() より後で
