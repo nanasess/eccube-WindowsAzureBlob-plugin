@@ -1,0 +1,23 @@
+<?php
+define('ECCUBE_INSTALL', 'ON');
+define('HTTP_URL', 'http://localhost/ec-cube/html/');
+define('HTTPS_URL', 'http://localhost/ec-cube/html/');
+define('ROOT_URLPATH', '/ec-cube/html/');
+define('DOMAIN_NAME', '');
+define('DB_TYPE', 'sqlsrv');
+define('DB_USER', 'eccube_db_user@rr06ka0th0');
+define('DB_PASSWORD', 'Password.0123');
+define('DB_SERVER', 'rr06ka0th0.database.windows.net');
+define('DB_NAME', 'test_azure_db');
+define('DB_PORT', '1433');
+define('ADMIN_DIR', 'admin/');
+define('ADMIN_FORCE_SSL', FALSE);
+define('ADMIN_ALLOW_HOSTS', 'a:0:{}');
+define('AUTH_MAGIC', '');
+define('PASSWORD_HASH_ALGOS', 'sha256');
+define('RELEASE_YEAR', '2013');
+define('MAIL_BACKEND', 'mail');
+define('SMTP_HOST', '');
+define('SMTP_PORT', '');
+define('SMTP_USER', '');
+define('SMTP_PASSWORD', '');
