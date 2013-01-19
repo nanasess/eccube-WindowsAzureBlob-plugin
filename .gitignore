@@ -1,1 +1,9 @@
 .svn
+GPATH
+GTAGS
+GRTAGS
+*.tpl.php
+ec-cube/data/cache/*
+ec-cube/data/config/*
+ec-cube/data/logs/*
+ec-cube/html/install/temp/*
