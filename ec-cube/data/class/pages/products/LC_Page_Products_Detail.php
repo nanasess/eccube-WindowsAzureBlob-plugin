@@ -537,6 +537,12 @@ class LC_Page_Products_Detail extends LC_Page_Ex {
         $objUpFile->setDBFileList($arrProduct);
         // ファイル表示用配列を渡す
         $arrFile = $objUpFile->getFormFileList(IMAGE_TEMP_URLPATH, IMAGE_SAVE_URLPATH, true);
+        // require_once(PLUGIN_UPLOAD_REALDIR . 'WindowsAzureBlob/class/helper/SC_Helper_AzureBlob.php');
+        // $objBlob = SC_Helper_AzureBlob::getInstance();
+        // $objFile = new BlobFile();
+        // $objFile->file_name = $arrProduct['main_image'];
+        // $objFile->real_filepath = $arrFile['main_image']['real_filepath'];
+        // $objBlob->copyToBlob($objFile);
 
         // サブ画像の有無を判定
         $subImageFlag = false;

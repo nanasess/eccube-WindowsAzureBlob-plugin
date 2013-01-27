@@ -24,4 +24,9 @@
 require_once CLASS_REALDIR . 'SC_ClassAutoloader.php';
 
 class SC_ClassAutoloader_Ex extends SC_ClassAutoloader {
+
+    public static function autoload($class) {
+        require_once(DATA_REALDIR . 'downloads/plugin/WindowsAzureBlob/azure-sdk-for-php/WindowsAzure/WindowsAzure.php');
+        parent::autoload($class);
+    }
 }
