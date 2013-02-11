@@ -9,16 +9,16 @@ use WindowsAzure\Blob\Models\CreateBlobOptions;
 
 class SC_Helper_AzureBlob {
 
-    private $instance;
+    private static $instance = null;
     protected function __construct() {
         $this->initialize();
     }
 
-    public function getInstance() {
-        if (is_null($this->instance)) {
-            $this->instance = new self();
+    public static function getInstance() {
+        if (is_null(self::$instance)) {
+            self::$instance = new self();
         }
-        return $this->instance;
+        return self::$instance;
     }
 
     protected function initialize() {
@@ -46,24 +46,33 @@ class SC_Helper_AzureBlob {
 
 
     public function copyToBlob(BlobFile $objFile) {
-        $objBlobMetadataResult = $this->blobRestProxy->getBlobMetadata($this->containerName, 'save_image/' . $objFile->file_name);
-        $arrMetadata = $objBlobMetadataResult->getMetadata();
-        if ($arrMetadata['mtime'] == $objFile->getMtime()) {
-            var_dump('equals');
-            return;
-        } elseif ($arrMetadata['mtime'] > $objFile->getMtime()) {
-            var_dump('get blob');
-        } else {
-            var_dump('put blob');
+        if ($this->exists_blob($objFile)) {
+            $objBlobMetadataResult = $this->blobRestProxy->getBlobMetadata($this->containerName, 'save_image/' . $objFile->file_name);
+            $arrMetadata = $objBlobMetadataResult->getMetadata();
+            if ($arrMetadata['mtime'] == $objFile->getMtime()) {
+                var_dump('equals');
+                return;
+            } elseif ($arrMetadata['mtime'] > $objFile->getMtime()) {
+                $result = file_put_contents(IMAGE_SAVE_REALDIR . $objFile->file_name,
+                                            ENDPOINT_PROTOCOL . '://' . AZURE_BLOB_ACCOUNT_NAME . '.blob.core.windows.net/' . $this->containerName . '/save_image/' . $objFile->file_name);
+                var_dump($result);
+            } else {
+                try {
+                    $createBlobOptions = new CreateBlobOptions();
+                    $createBlobOptions->setMetadata(array('mtime' => $objFile->getMtime()));
+                    $this->blobRestProxy->createBlockBlob($this->containerName, 'save_image/' . $objFile->file_name, $objFile->getResources(), $createBlobOptions);
+                } catch (ServiceException $e) {
+                    $code = $e->getCode();
+                    $error_message = $e->getMessage();
+                    echo $code.": ".$error_message."<br />";
+                }
+            }
         }
-        try {
-            $createBlobOptions = new CreateBlobOptions();
-            $createBlobOptions->setMetadata(array('mtime' => $objFile->getMtime()));
-            $this->blobRestProxy->createBlockBlob($this->containerName, 'save_image/' . $objFile->file_name, $objFile->getResources(), $createBlobOptions);
-        } catch (ServiceException $e) {
-            $code = $e->getCode();
-            $error_message = $e->getMessage();
-            echo $code.": ".$error_message."<br />";
-        }
+
+    }
+
+    // TODO
+    public function exists_blob(BlobFile $objFile) {
+        return false;
     }
 }

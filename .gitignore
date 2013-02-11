@@ -6,3 +6,5 @@ GRTAGS
 ec-cube/data/cache/*
 ec-cube/data/logs/*
 ec-cube/html/install/temp/*
+ec-cube/html/plugin
+
