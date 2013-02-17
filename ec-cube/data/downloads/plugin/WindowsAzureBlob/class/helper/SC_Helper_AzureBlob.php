@@ -47,32 +47,39 @@ class SC_Helper_AzureBlob {
 
     public function copyToBlob(BlobFile $objFile) {
         if ($this->exists_blob($objFile)) {
+            $this->outLog('exists_blob');
             $objBlobMetadataResult = $this->blobRestProxy->getBlobMetadata($this->containerName, 'save_image/' . $objFile->file_name);
             $arrMetadata = $objBlobMetadataResult->getMetadata();
             if ($arrMetadata['mtime'] == $objFile->getMtime()) {
-                var_dump('equals');
+                $this->outLog('equals');
                 return;
             } elseif ($arrMetadata['mtime'] > $objFile->getMtime()) {
                 $result = file_put_contents(IMAGE_SAVE_REALDIR . $objFile->file_name,
                                             ENDPOINT_PROTOCOL . '://' . AZURE_BLOB_ACCOUNT_NAME . '.blob.core.windows.net/' . $this->containerName . '/save_image/' . $objFile->file_name);
-                var_dump($result);
+                $this->outLog($result);
             } else {
-                try {
-                    $createBlobOptions = new CreateBlobOptions();
-                    $createBlobOptions->setMetadata(array('mtime' => $objFile->getMtime()));
-                    $this->blobRestProxy->createBlockBlob($this->containerName, 'save_image/' . $objFile->file_name, $objFile->getResources(), $createBlobOptions);
-                } catch (ServiceException $e) {
-                    $code = $e->getCode();
-                    $error_message = $e->getMessage();
-                    echo $code.": ".$error_message."<br />";
-                }
             }
-        }
+        } else {
+            try {
+                $this->outLog('create: ' . $objFile->file_name);
+                $createBlobOptions = new CreateBlobOptions();
+                $createBlobOptions->setMetadata(array('mtime' => $objFile->getMtime()));
+                $this->blobRestProxy->createBlockBlob($this->containerName, 'save_image/' . $objFile->file_name, $objFile->getResources(), $createBlobOptions);
+            } catch (ServiceException $e) {
+                $code = $e->getCode();
+                $error_message = $e->getMessage();
+                $this->outLog($code.": ".$error_message."<br />");
+            }
 
+        }
     }
 
     // TODO
     public function exists_blob(BlobFile $objFile) {
-        return false;
+        return true;
+    }
+
+    private function outLog($message) {
+        error_log($message . PHP_EOL, 3, realpath(dirname( __FILE__)) . '/blob.log');
     }
 }

@@ -55,7 +55,7 @@
                         target="_blank"
                     >
                 <!--{/if}-->
-                    <img src="<!--{$arrFile[$key].filepath|h}-->" width="<!--{$arrFile[$key].width}-->" height="<!--{$arrFile[$key].height}-->" alt="<!--{$arrProduct.name|h}-->" class="picture" />
+                    <img src="<!--{$arrFile[$key].filepath|h}-->" width="<!--{$arrFile[$key].width}-->" height="<!--{$arrFile[$key].height}-->" alt="<!--{$arrProduct.name|h}-->" class="picture blobsync" />
                 <!--{if $arrProduct.main_large_image|strlen >= 1}-->
                     </a>
                 <!--{/if}-->

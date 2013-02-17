@@ -40,6 +40,7 @@
 <script type="text/javascript" src="<!--{$smarty.const.ROOT_URLPATH}-->js/win_op.js"></script>
 <script type="text/javascript" src="<!--{$smarty.const.ROOT_URLPATH}-->js/site.js"></script>
 <script type="text/javascript" src="<!--{$smarty.const.ROOT_URLPATH}-->js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="<!--{$smarty.const.PLUGIN_HTML_URLPATH}-->WindowsAzureBlob/js/jquery.blobImageSynchronizer.js"></script>
 <title><!--{$arrSiteInfo.shop_name|h}--><!--{if $tpl_subtitle|strlen >= 1}--> / <!--{$tpl_subtitle|h}--><!--{elseif $tpl_title|strlen >= 1}--> / <!--{$tpl_title|h}--><!--{/if}--></title>
 <!--{if $arrPageLayout.author|strlen >= 1}-->
     <meta name="author" content="<!--{$arrPageLayout.author|h}-->" />
@@ -57,6 +58,9 @@
     <!--{$tpl_javascript}-->
     $(function(){
         <!--{$tpl_onload}-->
+        $('img.blobsync').blobImageSynchronizer({
+            blobSynchronizer : '<!--{$smarty.const.PLUGIN_HTML_URLPATH}-->WindowsAzureBlob/blobSynchronizer.php'
+        });
     });
 //]]></script>
 
