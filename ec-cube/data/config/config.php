@@ -1,10 +1,10 @@
 <?php
 define('ECCUBE_INSTALL', 'ON');
-define('HTTP_URL', 'http://' . $_SERVER['SERVER_NAME'] . '/ec-cube/html/');
-define('HTTPS_URL', 'http://' . $_SERVER['SERVER_NAME'] . '/ec-cube/html/');
-define('ROOT_URLPATH', '/ec-cube/html/');
+define('HTTP_URL', $_SERVER['HTTP_URL']);
+define('HTTPS_URL', $_SERVER['HTTPS_URL']);
+define('ROOT_URLPATH', $_SERVER['ROOT_URLPATH']);
 define('DOMAIN_NAME', '');
-define('DB_TYPE', 'sqlsrv');
+define('DB_TYPE', $_SERVER['DB_TYPE']);
 define('DB_USER', $_SERVER['DB_USER']);
 define('DB_PASSWORD', $_SERVER['DB_PASSWORD']);
 define('DB_SERVER', $_SERVER['DB_SERVER']);
