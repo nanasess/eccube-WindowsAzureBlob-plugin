@@ -6,6 +6,8 @@ use WindowsAzure\Common\ServicesBuilder;
 use WindowsAzure\Blob\Models\CreateContainerOptions;
 use WindowsAzure\Blob\Models\PublicAccessType;
 use WindowsAzure\Blob\Models\CreateBlobOptions;
+use WindowsAzure\Blob\Models\ListBlobsOptions;
+use WindowsAzure\Blob\Models\ListBlobsResult;
 
 class SC_Helper_AzureBlob {
 
@@ -74,9 +76,15 @@ class SC_Helper_AzureBlob {
         }
     }
 
-    // TODO
     public function exists_blob(BlobFile $objFile) {
-        return true;
+        $listBlobOptions = new ListBlobsOptions();
+        $listBlobOptions->setPrefix('save_image/' . $objFile->file_name);
+        $listBlobResults = $this->blobRestProxy->listBlobs($this->containerName, $listBlobOptions);
+        $arrBlobs = $listBlobResults->getBlobs();
+        if (is_array($arrBlobs) && count($arrBlobs) > 0) {
+            return true;
+        }
+        return false;
     }
 
     private function outLog($message) {

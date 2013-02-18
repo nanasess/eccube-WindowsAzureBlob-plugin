@@ -59,7 +59,8 @@
     $(function(){
         <!--{$tpl_onload}-->
         $('img.blobsync').blobImageSynchronizer({
-            blobSynchronizer : '<!--{$smarty.const.PLUGIN_HTML_URLPATH}-->WindowsAzureBlob/blobSynchronizer.php'
+            blobSynchronizer : '<!--{$smarty.const.PLUGIN_HTML_URLPATH}-->WindowsAzureBlob/blobSynchronizer.php',
+            type : 'blob'
         });
     });
 //]]></script>
