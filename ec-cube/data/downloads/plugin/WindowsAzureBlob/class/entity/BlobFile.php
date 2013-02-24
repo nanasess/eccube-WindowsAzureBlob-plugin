@@ -18,4 +18,11 @@ class BlobFile extends Entity {
     public function getMtime() {
         return filemtime($this->real_filepath);
     }
+
+    public function getMimeType() {
+        $objFinfo = new finfo(FILEINFO_MIME_TYPE);
+        $mimeType = $objFinfo->file($this->real_filepath, $finfo);
+        finfo_close($finfo);
+        return $mimeType;
+    }
 }

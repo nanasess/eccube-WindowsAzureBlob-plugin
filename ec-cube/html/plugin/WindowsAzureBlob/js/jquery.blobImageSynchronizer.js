@@ -10,7 +10,7 @@
                    }
 
                    $this = $(this);
-                   var src = $this.attr('src');
+                   var src = $this.attr(o.targetAttribute);
                    $this.hide();
                    $.ajax({
                        url : o.blobSynchronizer,
@@ -22,10 +22,11 @@
                        },
                        dataType : 'text',
                        success : function(data, textStatus, jqXHR) {
-                           console.log(data);
-                           $this.attr('src', data);
+                           $this.attr(o.targetAttribute, data);
                        },
-                       error : function(jqXHR, textStatus, errorThrown) {},
+                       error : function(jqXHR, textStatus, errorThrown) {
+                           alert(textStatus);
+                       },
                        complete : function() {
                            $this.fadeIn();
                        }
@@ -36,6 +37,7 @@
     $.fn.blobImageSynchronizer.defaults = {
         loadingImage : ''
       , blobSynchronizer : 'blobSynchronizer.php'
-      , type : 'local'
+      , type : 'blob'
+      , targetAttribute : 'src'
     };
 })(jQuery);

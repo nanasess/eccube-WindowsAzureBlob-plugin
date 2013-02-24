@@ -63,8 +63,11 @@ class SC_Helper_AzureBlob {
             }
         } else {
             try {
+                $mimeType = $objFile->getMimeType();
                 $this->outLog('create: ' . $objFile->file_name);
+                $this->outLog('mimeType: ' . $mimeType);
                 $createBlobOptions = new CreateBlobOptions();
+                $createBlobOptions->setBlobContentType($mimeType);
                 $createBlobOptions->setMetadata(array('mtime' => $objFile->getMtime()));
                 $this->blobRestProxy->createBlockBlob($this->containerName, 'save_image/' . $objFile->file_name, $objFile->getResources(), $createBlobOptions);
             } catch (ServiceException $e) {
