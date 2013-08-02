@@ -33,13 +33,13 @@ require_once(dirname(__FILE__) . "/../html/require.php");
 // {{{ constants
 
 /** 大カテゴリの生成数 */
-define('TOP_CATEGORIES_VOLUME', 5);
+define('TOP_CATEGORIES_VOLUME', 3);
 
 /** 中カテゴリの生成数 */
 define('MIDDLE_CATEGORIES_VOLUME', 2);
 
 /** 小カテゴリの生成数 */
-define('SMALL_CATEGORIES_VOLUME', 3);
+define('SMALL_CATEGORIES_VOLUME', 1);
 
 /** 規格1の生成数 */
 define('CLASSCATEGORY1_VOLUME', 10);
@@ -48,7 +48,7 @@ define('CLASSCATEGORY1_VOLUME', 10);
 define('CLASSCATEGORY2_VOLUME', 10);
 
 /** 商品の生成数 */
-define('PRODUCTS_VOLUME', 100);
+define('PRODUCTS_VOLUME', 10000);
 
 // }}}
 // {{{ Logic
