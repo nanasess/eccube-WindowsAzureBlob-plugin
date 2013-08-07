@@ -1334,7 +1334,8 @@ class SC_Utils {
      * @return string ランダムな文字列
      */
     function sfGetRandomString($length = 1) {
-        //return Text_Password::create($length);
+        return self::sfGetUniqRandomId();
+        // return Text_Password::create($length);
     }
 
     /**

@@ -42,10 +42,10 @@ define('MIDDLE_CATEGORIES_VOLUME', 2);
 define('SMALL_CATEGORIES_VOLUME', 1);
 
 /** 規格1の生成数 */
-define('CLASSCATEGORY1_VOLUME', 10);
+define('CLASSCATEGORY1_VOLUME', 3);
 
 /** 規格2の生成数 */
-define('CLASSCATEGORY2_VOLUME', 10);
+define('CLASSCATEGORY2_VOLUME', 3);
 
 /** 商品の生成数 */
 define('PRODUCTS_VOLUME', 1000);
