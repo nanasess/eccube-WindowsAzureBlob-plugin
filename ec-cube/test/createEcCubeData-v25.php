@@ -48,7 +48,7 @@ define('CLASSCATEGORY1_VOLUME', 10);
 define('CLASSCATEGORY2_VOLUME', 10);
 
 /** 商品の生成数 */
-define('PRODUCTS_VOLUME', 10000);
+define('PRODUCTS_VOLUME', 1000);
 
 // }}}
 // {{{ Logic
